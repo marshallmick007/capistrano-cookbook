@@ -164,11 +164,12 @@ The `deploy:setup_config` tasks provides a simple way to automate the generation
 
 If no values are provided in `deploy.rb` to override the defaults then this task includes opinionated defaults to setup a server for deployment as explained in the book [Reliably Deploying Rails Applications](https://leanpub.com/deploying_rails_applications) and [this tutorial](http://www.talkingquickly.co.uk/2014/01/deploying-rails-apps-to-a-vps-with-capistrano-v3/).
 
-Each of the `config_files` will be created in `APP_PATH/shared.config`.
+Each of the `config_files` will be created in the `APP_PATH/shared/config` directory on the destination server.
 
 The task looks in the following locations for a template file with a corresponding name with a `.erb` extension:
 
-* `config/deploy/STAGE/FILENAME.erb`
+* `config/deploy/FULL_APP_NAME/FILENAME.erb`, where `FULL_APP_NAME` is defined in your `deploy.rb` or `STAGE.rb` Capistrano files
+* <strike>`config/deploy/STAGE/FILENAME.erb`</strike> - This does not work because of [Issue 11](https://github.com/TalkingQuickly/capistrano-cookbook/issues/11)
 * `config/deploy/shared/FILENAME.erb`
 * `templates/FILENAME.erb` directory of this gem ([github link](https://github.com/TalkingQuickly/capistrano-cookbook/tree/master/lib/capistrano/cookbook/templates))  
 
